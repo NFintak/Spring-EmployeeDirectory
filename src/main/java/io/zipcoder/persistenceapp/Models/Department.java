@@ -1,7 +1,6 @@
-package io.zipcoder.persistenceapp;
+package io.zipcoder.persistenceapp.Models;
 
 import javax.persistence.*;
-import io.zipcoder.persistenceapp.Employee;
 
 public class Department {
 
