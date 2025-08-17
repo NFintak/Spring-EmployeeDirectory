@@ -17,7 +17,18 @@ public class Employee {
     private String email;
     private Date hireDate;
     private String manager;
-    private int deptNum;
+    private Long deptNum;
+
+    public Employee() {
+        this.firstName = "";
+        this.lastName = "";
+        this.title = "";
+        this.phoneNum = 0;
+        this.email = "";
+        this.hireDate = null;
+        this.manager = "";
+        this.deptNum = 0L;
+    }
 
     public Long getEmployeeId() {
         return employeeId;
@@ -55,6 +66,36 @@ public class Employee {
         return phoneNum;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public Date getHireDate() {
+        return hireDate;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setDeptNum(Long deptNum) {
+        this.deptNum = deptNum;
+    }
+
+    public Long getDeptNum() {
+        return deptNum;
+    }
 
 }
