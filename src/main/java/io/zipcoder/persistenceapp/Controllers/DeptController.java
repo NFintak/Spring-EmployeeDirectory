@@ -15,5 +15,14 @@ import java.util.List;
 
 //all endpoints should start with '/API'
 
+/* should include endpoints to:
+POST/CREATE
+- create dept
+UPDATE
+- set new name
+- set new dept manager
+- merge depts (dept manager for B reports to dept manager A, move all employees under dept B to dept A)
+ */
+
 public class DeptController {
 }
