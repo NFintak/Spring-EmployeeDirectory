@@ -30,6 +30,17 @@ public class Employee {
         this.deptNum = 0L;
     }
 
+    public Employee(String firstName, String lastName, int phoneNum, String email, Date hireDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.title = "";
+        this.phoneNum = phoneNum;
+        this.email = email;
+        this.hireDate = hireDate;
+        this.manager = "";
+        this.deptNum = 0L;
+    }
+
     public Long getEmployeeId() {
         return employeeId;
     }
