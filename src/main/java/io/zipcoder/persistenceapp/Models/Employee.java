@@ -13,7 +13,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String title;
-    private int phoneNum;
+    private String phoneNum;
     private String email;
     private Date hireDate;
     private Employee manager;
@@ -23,7 +23,7 @@ public class Employee {
         this.firstName = "";
         this.lastName = "";
         this.title = "";
-        this.phoneNum = 0;
+        this.phoneNum = "";
         this.email = "";
         this.hireDate = null;
         this.manager = null;
@@ -34,14 +34,14 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = "";
-        this.phoneNum = 0;
+        this.phoneNum = "";
         this.email = "";
         this.hireDate = null;
         this.manager = null;
         this.deptNum = 0;
     }
 
-    public Employee(String firstName, String lastName, int phoneNum, String email, Date hireDate) {
+    public Employee(String firstName, String lastName, String phoneNum, String email, Date hireDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = "";
@@ -52,7 +52,7 @@ public class Employee {
         this.deptNum = 0;
     }
 
-    public Employee(String firstName, String lastName, String title, int phoneNum, String email, Date hireDate, Employee manager, int deptNum) {
+    public Employee(String firstName, String lastName, String title, String phoneNum, String email, Date hireDate, Employee manager, int deptNum) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
@@ -91,11 +91,11 @@ public class Employee {
         return title;
     }
 
-    public void setPhoneNumber(int phoneNum) {
+    public void setPhoneNumber(String phoneNum) {
         this.phoneNum = phoneNum;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNum;
     }
 
