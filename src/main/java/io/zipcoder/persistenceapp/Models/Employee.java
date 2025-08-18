@@ -8,7 +8,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long employeeId;
+    private int employeeId;
 
     private String firstName;
     private String lastName;
@@ -52,7 +52,7 @@ public class Employee {
         this.deptNum = 0L;
     }
 
-    public Long getEmployeeId() {
+    public int getEmployeeId() {
         return employeeId;
     }
 

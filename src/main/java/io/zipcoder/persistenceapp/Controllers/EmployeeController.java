@@ -33,7 +33,7 @@ DELETE
 - remove direct reports only (all indirects report to next manager in hierarchy)
  */
 @RestController
-@RequestMapping("/API")
+@RequestMapping("/API/employees")
 public class EmployeeController {
 
     private final Logger LOG = LoggerFactory.getLogger(EmployeeController.class);
@@ -48,6 +48,17 @@ public class EmployeeController {
         Employee newEmployee = new Employee(employee.getFirstName(), employee.getLastName());
         employeeRepo.save(newEmployee);
         return new ResponseEntity<Employee>(newEmployee, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Employee> getById(@PathVariable int id) {
+        Employee byId = employeeRepo.findOne(id);
+        if (byId == null) {
+            return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Employee>(byId, HttpStatus.OK);
     }
 
 }
