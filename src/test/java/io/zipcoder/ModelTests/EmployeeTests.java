@@ -37,6 +37,54 @@ public class EmployeeTests {
     }
 
     @Test
+    public void test3Constructor() {
+        Employee test = new Employee("Jane", "Doe", "Assistant Manager", "555-444-3322", "jdoe@test.com", new Date(2000/01/01), new Employee(), 12);
+        assertNotNull(test);
+        assertEquals(12, test.getDeptNum());
+    }
+
+    @Test
+    public void testGetSetNames() {
+        Employee test = new Employee();
+        String expectedFirst = "John";
+        String expectedLast = "Doe";
+        test.setFirstName(expectedFirst);
+        test.setLastName(expectedLast);
+        assertEquals(expectedFirst, test.getFirstName());
+        assertEquals(expectedLast, test.getLastName());
+    }
+
+    @Test
+    public void testGetSetTitle() {
+
+    }
+
+    @Test
+    public void testGetSetPhoneNum() {
+
+    }
+
+    @Test
+    public void testGetSetEmail() {
+
+    }
+
+    @Test
+    public void testGetSetHireDate() {
+
+    }
+
+    @Test
+    public void testGetSetManager() {
+
+    }
+
+    @Test
+    public void testGetSetDeptNum() {
+
+    }
+
+    @Test
     public void testCreateJson() throws JsonProcessingException {
         ObjectMapper jsonWriter = new ObjectMapper();
         Employee test = new Employee();
