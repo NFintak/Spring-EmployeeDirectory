@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import io.zipcoder.persistenceapp.Repos.EmployeeRepo;
+import io.zipcoder.persistenceapp.Models.Employee;
 
 //all endpoints should start with '/API'
 /* should include endpoints to:
@@ -30,6 +32,22 @@ DELETE
 - remove all employees by manager (including indirects)
 - remove direct reports only (all indirects report to next manager in hierarchy)
  */
-
+@RestController
+@RequestMapping("/API")
 public class EmployeeController {
+
+    private final Logger LOG = LoggerFactory.getLogger(EmployeeController.class);
+
+    @Autowired
+    public EmployeeRepo employeeRepo;
+
+    @PostMapping
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+        Employee newEmployee = new Employee(employee.getFirstName(), employee.getLastName());
+        employeeRepo.save(newEmployee);
+        return new ResponseEntity<Employee>(newEmployee, HttpStatus.CREATED);
+    }
+
 }
