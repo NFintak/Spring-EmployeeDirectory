@@ -16,8 +16,8 @@ public class Employee {
     private int phoneNum;
     private String email;
     private Date hireDate;
-    private String manager;
-    private Long deptNum;
+    private Employee manager;
+    private int deptNum;
 
     public Employee() {
         this.firstName = "";
@@ -26,8 +26,8 @@ public class Employee {
         this.phoneNum = 0;
         this.email = "";
         this.hireDate = null;
-        this.manager = "";
-        this.deptNum = 0L;
+        this.manager = null;
+        this.deptNum = 0;
     }
 
     public Employee(String firstName, String lastName) {
@@ -37,8 +37,8 @@ public class Employee {
         this.phoneNum = 0;
         this.email = "";
         this.hireDate = null;
-        this.manager = "";
-        this.deptNum = 0L;
+        this.manager = null;
+        this.deptNum = 0;
     }
 
     public Employee(String firstName, String lastName, int phoneNum, String email, Date hireDate) {
@@ -48,8 +48,19 @@ public class Employee {
         this.phoneNum = phoneNum;
         this.email = email;
         this.hireDate = hireDate;
-        this.manager = "";
-        this.deptNum = 0L;
+        this.manager = null;
+        this.deptNum = 0;
+    }
+
+    public Employee(String firstName, String lastName, String title, int phoneNum, String email, Date hireDate, Employee manager, int deptNum) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.title = title;
+        this.phoneNum = phoneNum;
+        this.email = email;
+        this.hireDate = hireDate;
+        this.manager = manager;
+        this.deptNum = deptNum;
     }
 
     public int getEmployeeId() {
@@ -104,19 +115,19 @@ public class Employee {
         return hireDate;
     }
 
-    public void setManager(String manager) {
+    public void setManager(Employee manager) {
         this.manager = manager;
     }
 
-    public String getManager() {
+    public Employee getManager() {
         return manager;
     }
 
-    public void setDeptNum(Long deptNum) {
+    public void setDeptNum(int deptNum) {
         this.deptNum = deptNum;
     }
 
-    public Long getDeptNum() {
+    public int getDeptNum() {
         return deptNum;
     }
 

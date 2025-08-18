@@ -15,8 +15,6 @@ import io.zipcoder.persistenceapp.Models.Employee;
 
 //all endpoints should start with '/API'
 /* should include endpoints to:
-POST/CREATE
-- create employee
 UPDATE
 - update employee fields (first/last name, title, phone number, email, manager, dept)
 READ
@@ -48,6 +46,26 @@ public class EmployeeController {
         Employee newEmployee = new Employee(employee.getFirstName(), employee.getLastName());
         employeeRepo.save(newEmployee);
         return new ResponseEntity<Employee>(newEmployee, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Employee> updateById(@PathVariable("id") int id, @RequestBody Employee employee) {
+        Employee toUpdate = employeeRepo.findOne(id);
+        if (toUpdate == null) {
+            return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
+        }
+        toUpdate.setFirstName(employee.getFirstName());
+        toUpdate.setLastName(employee.getLastName());
+        toUpdate.setTitle(employee.getTitle());
+        toUpdate.setPhoneNumber(employee.getPhoneNumber());
+        toUpdate.setEmail(employee.getEmail());
+        toUpdate.setHireDate(employee.getHireDate());
+        toUpdate.setManager(employee.getManager());
+        toUpdate.setDeptNum(employee.getDeptNum());
+
+        employeeRepo.save(toUpdate);
+        return new ResponseEntity<Employee>(toUpdate, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
