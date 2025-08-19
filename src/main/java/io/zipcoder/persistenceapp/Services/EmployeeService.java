@@ -67,4 +67,14 @@ public class EmployeeService {
         return reportingChain;
     }
 
+    public List<Employee> findNullManagers() {
+        List<Employee> noManagers = new ArrayList<>();
+        for (Employee employee : index()) {
+            if (employee.getManager() == null) {
+                noManagers.add(employee);
+            }
+        }
+        return noManagers;
+    }
+
 }

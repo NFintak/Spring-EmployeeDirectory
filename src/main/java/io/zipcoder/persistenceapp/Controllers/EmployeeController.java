@@ -17,7 +17,6 @@ import io.zipcoder.persistenceapp.Models.Employee;
 //all endpoints should start with '/API'
 /* should include endpoints to:
 READ
-- reporting hierarchy for an employee (their manager + their manager's manager, etc.)
 - list of employees w/ no manager
 - list of employees in a given dept
 - list of employees directly/indirectly reporting to a given manager (should be applicable to non-managers too)
@@ -75,7 +74,7 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Employee>> getByManager(@PathVariable Employee manager) {
         List<Employee> byManager = employeeService.findByManager(manager);
-        if (byManager == null) {
+        if (byManager.isEmpty()) {
             return new ResponseEntity<List<Employee>>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<List<Employee>>(byManager, HttpStatus.OK);
@@ -86,9 +85,20 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Employee>> getReportingChain(@PathVariable Employee employee) {
         List<Employee> reportingChain = employeeService.findReptHierarchy(employee);
-        if (reportingChain == null) {
+        if (reportingChain.isEmpty()) {
             return new ResponseEntity<List<Employee>>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<List<Employee>>(reportingChain, HttpStatus.OK);
+    }
+
+    @GetMapping("/manager/null")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Employee>> getNullManagerList() {
+        List<Employee> nullManagerList = employeeService.findNullManagers();
+        if (nullManagerList.isEmpty()) {
+            return new ResponseEntity<List<Employee>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Employee>>(nullManagerList, HttpStatus.OK);
     }
 }
