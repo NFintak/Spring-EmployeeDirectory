@@ -56,32 +56,50 @@ public class EmployeeTests {
 
     @Test
     public void testGetSetTitle() {
-
+        Employee test = new Employee();
+        String expectedTitle = "Assistant Manager";
+        test.setTitle(expectedTitle);
+        assertEquals(expectedTitle, test.getTitle());
     }
 
     @Test
     public void testGetSetPhoneNum() {
-
+        Employee test = new Employee();
+        String expectedNum = "555-444-3322";
+        test.setPhoneNumber(expectedNum);
+        assertEquals(expectedNum, test.getPhoneNumber());
     }
 
     @Test
     public void testGetSetEmail() {
-
+        Employee test = new Employee();
+        String expectedEmail = "jdoe@test.com";
+        test.setEmail(expectedEmail);
+        assertEquals(expectedEmail, test.getEmail());
     }
 
     @Test
     public void testGetSetHireDate() {
-
+        Employee test = new Employee();
+        Date expectedDate = new Date(2017/4/23);
+        test.setHireDate(expectedDate);
+        assertEquals(expectedDate, test.getHireDate());
     }
 
     @Test
     public void testGetSetManager() {
-
+        Employee test = new Employee();
+        Employee expectedManager = new Employee("Jane", "Doe");
+        test.setManager(expectedManager);
+        assertEquals(expectedManager, test.getManager());
     }
 
     @Test
     public void testGetSetDeptNum() {
-
+        Employee test = new Employee();
+        int expectedDeptNum = 42;
+        test.setDeptNum(expectedDeptNum);
+        assertEquals(42, test.getDeptNum());
     }
 
     @Test
@@ -89,7 +107,7 @@ public class EmployeeTests {
         ObjectMapper jsonWriter = new ObjectMapper();
         Employee test = new Employee();
         String json = jsonWriter.writeValueAsString(test);
-        String expected = "{\"employeeId\":0,\"firstName\":\"\",\"lastName\":\"\",\"title\":\"\",\"email\":\"\",\"hireDate\":null,\"manager\":null,\"deptNum\":0,\"phoneNumber\":0}";
+        String expected = "{\"employeeId\":0,\"firstName\":\"\",\"lastName\":\"\",\"title\":\"\",\"email\":\"\",\"hireDate\":null,\"manager\":null,\"deptNum\":0,\"phoneNumber\":\"\"}";
         assertEquals(expected, json);
     }
 }
