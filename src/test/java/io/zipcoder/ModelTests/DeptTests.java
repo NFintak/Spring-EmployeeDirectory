@@ -34,4 +34,31 @@ public class DeptTests {
         assertEquals(0, test.getDeptId());
     }
 
+    @Test
+    public void testGetSetDeptName() {
+        Department test = new Department();
+        String expectedName = "Human Resources";
+        test.setDeptName(expectedName);
+        assertEquals("Human Resources", test.getDeptName());
+    }
+
+    @Test
+    public void testGetSetDeptManager() {
+        Department test = new Department();
+        Employee expected = new Employee();
+        test.setDeptManager(expected);
+        assertEquals(expected, test.getDeptManager());
+    }
+
+    @Test
+    public void testCreateJson() throws JsonProcessingException {
+        ObjectMapper jsonWriter = new ObjectMapper();
+        Employee manager = new Employee("Jane", "Doe");
+        Department test = new Department("Human Resources", manager);
+        String json = jsonWriter.writeValueAsString(test);
+        String expected = "{\"deptId\":0,\"deptName\":\"Human Resources\",\"deptManager\":{\"employeeId\":0,\"firstName\":\"Jane\",\"lastName\":\"Doe\"," +
+                "\"title\":\"\",\"email\":\"\",\"hireDate\":null,\"manager\":null,\"deptNum\":0,\"phoneNumber\":\"\"}}";
+        assertEquals(expected, json);
+    }
+
 }
