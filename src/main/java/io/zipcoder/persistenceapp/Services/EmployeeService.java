@@ -19,6 +19,31 @@ public class EmployeeService {
         this.repo = repo;
     }
 
+    public Employee create(Employee employee) {
+        return repo.save(employee);
+    }
+
+    public Employee update(int id, Employee newEmployee) {
+        Employee originalData = repo.findOne(id);
+        if (originalData == null) {
+            return repo.save(newEmployee);
+        } else {
+            originalData.setFirstName(newEmployee.getFirstName());
+            originalData.setLastName(newEmployee.getLastName());
+            originalData.setTitle(newEmployee.getTitle());
+            originalData.setPhoneNumber(newEmployee.getPhoneNumber());
+            originalData.setEmail(newEmployee.getPhoneNumber());
+            originalData.setHireDate(newEmployee.getHireDate());
+            originalData.setManager(newEmployee.getManager());
+            originalData.setDeptNum(newEmployee.getDeptNum());
+            return repo.save(originalData);
+        }
+    }
+
+    public Employee getEmployee(int id) {
+        return repo.findOne(id);
+    }
+
     public Iterable<Employee> index() {
         return repo.findAll();
     }

@@ -34,37 +34,28 @@ public class EmployeeController {
     private final Logger LOG = LoggerFactory.getLogger(EmployeeController.class);
 
     @Autowired
-    private EmployeeRepo employeeRepo;
+    private EmployeeRepo employeeRepo; //rework to replace uses of repo with service
 
     @Autowired
     private EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
         Employee newEmployee = new Employee(employee.getFirstName(), employee.getLastName());
-        employeeRepo.save(newEmployee);
+        employeeService.create(newEmployee);
         return new ResponseEntity<Employee>(newEmployee, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Employee> updateById(@PathVariable("id") int id, @RequestBody Employee employee) {
-        Employee toUpdate = employeeRepo.findOne(id);
-        if (toUpdate == null) {
-            return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
-        }
-        toUpdate.setFirstName(employee.getFirstName());
-        toUpdate.setLastName(employee.getLastName());
-        toUpdate.setTitle(employee.getTitle());
-        toUpdate.setPhoneNumber(employee.getPhoneNumber());
-        toUpdate.setEmail(employee.getEmail());
-        toUpdate.setHireDate(employee.getHireDate());
-        toUpdate.setManager(employee.getManager());
-        toUpdate.setDeptNum(employee.getDeptNum());
-
-        employeeRepo.save(toUpdate);
+        Employee toUpdate = employeeService.update(id, employee);
         return new ResponseEntity<Employee>(toUpdate, HttpStatus.OK);
     }
 
@@ -72,7 +63,7 @@ public class EmployeeController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Employee> getById(@PathVariable int id) {
-        Employee byId = employeeRepo.findOne(id);
+        Employee byId = employeeService.getEmployee(id);
         if (byId == null) {
             return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
         }
