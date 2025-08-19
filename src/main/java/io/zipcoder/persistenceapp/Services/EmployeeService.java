@@ -87,4 +87,11 @@ public class EmployeeService {
         return byDept;
     }
 
+    public List<Employee> findAllReporting(Employee employee) {
+        List<Employee> directsAndIndirects = new ArrayList<>();
+        //find all employees directly below manager
+        //if any of those employees are managers as well, find all employees under them, etc.
+        return null;
+    }
+
 }

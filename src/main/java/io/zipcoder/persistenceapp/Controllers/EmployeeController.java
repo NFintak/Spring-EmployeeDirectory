@@ -17,7 +17,6 @@ import io.zipcoder.persistenceapp.Models.Employee;
 //all endpoints should start with '/API'
 /* should include endpoints to:
 READ
-- list of employees in a given dept
 - list of employees directly/indirectly reporting to a given manager (should be applicable to non-managers too)
 DELETE
 - remove specific employee/list of employees
