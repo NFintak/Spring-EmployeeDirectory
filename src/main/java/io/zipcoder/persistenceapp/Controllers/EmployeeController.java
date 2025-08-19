@@ -17,7 +17,6 @@ import io.zipcoder.persistenceapp.Models.Employee;
 //all endpoints should start with '/API'
 /* should include endpoints to:
 READ
-- list of employees under a manager
 - reporting hierarchy for an employee (their manager + their manager's manager, etc.)
 - list of employees w/ no manager
 - list of employees in a given dept
@@ -91,5 +90,14 @@ public class EmployeeController {
         return new ResponseEntity<List<Employee>>(byManager, HttpStatus.OK);
     }
 
-
+    @GetMapping("/reporting/{employee}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Employee>> getReportingChain(@PathVariable Employee employee) {
+        List<Employee> reportingChain = employeeService.findReptHierarchy(employee);
+        if (reportingChain == null) {
+            return new ResponseEntity<List<Employee>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Employee>>(reportingChain, HttpStatus.OK);
+    }
 }

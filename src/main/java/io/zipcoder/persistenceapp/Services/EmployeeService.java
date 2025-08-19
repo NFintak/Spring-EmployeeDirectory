@@ -25,12 +25,21 @@ public class EmployeeService {
 
     public List<Employee> findByManager(Employee manager) {
         List<Employee> byManager = new ArrayList<>();
-        for (Employee employee : index()) {
-            if (manager.equals(employee.getManager())) {
-                byManager.add(employee);
+        for (Employee employees : index()) {
+            if (manager.equals(employees.getManager())) {
+                byManager.add(employees);
             }
         }
         return byManager;
+    }
+
+    public List<Employee> findReptHierarchy(Employee employee) {
+        List<Employee> reportingChain = new ArrayList<>();
+        while (employee.getManager() != null) {
+            reportingChain.add(employee.getManager());
+            employee = employee.getManager();
+        }
+        return reportingChain;
     }
 
 }
