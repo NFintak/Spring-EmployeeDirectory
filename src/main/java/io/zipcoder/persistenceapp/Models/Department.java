@@ -2,6 +2,7 @@ package io.zipcoder.persistenceapp.Models;
 
 import javax.persistence.*;
 
+@Entity
 public class Department {
 
     @Id
