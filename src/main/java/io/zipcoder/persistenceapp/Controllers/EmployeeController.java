@@ -17,7 +17,6 @@ import io.zipcoder.persistenceapp.Models.Employee;
 //all endpoints should start with '/API'
 /* should include endpoints to:
 READ
-- list of employees w/ no manager
 - list of employees in a given dept
 - list of employees directly/indirectly reporting to a given manager (should be applicable to non-managers too)
 DELETE
@@ -101,4 +100,16 @@ public class EmployeeController {
         }
         return new ResponseEntity<List<Employee>>(nullManagerList, HttpStatus.OK);
     }
+
+    @GetMapping("/dept/{id}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Employee>> getByDeptNum(@PathVariable int deptNum) {
+        List<Employee> byDeptNum = employeeService.findByDept(deptNum);
+        if (byDeptNum.isEmpty()) {
+            return new ResponseEntity<List<Employee>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Employee>>(byDeptNum, HttpStatus.OK);
+    }
+
 }

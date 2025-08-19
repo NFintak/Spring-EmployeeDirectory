@@ -77,4 +77,14 @@ public class EmployeeService {
         return noManagers;
     }
 
+    public List<Employee> findByDept(int deptNum) {
+        List<Employee> byDept = new ArrayList<>();
+        for (Employee employee : index()) {
+            if (employee.getDeptNum() == deptNum) {
+                byDept.add(employee);
+            }
+        }
+        return byDept;
+    }
+
 }
