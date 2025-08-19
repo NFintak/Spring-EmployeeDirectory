@@ -11,19 +11,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import io.zipcoder.persistenceapp.Repos.EmployeeRepo;
+import io.zipcoder.persistenceapp.Services.EmployeeService;
 import io.zipcoder.persistenceapp.Models.Employee;
 
 //all endpoints should start with '/API'
 /* should include endpoints to:
-UPDATE
-- update employee fields (first/last name, title, phone number, email, manager, dept)
 READ
 - list of employees under a manager
 - reporting hierarchy for an employee (their manager + their manager's manager, etc.)
 - list of employees w/ no manager
 - list of employees in a given dept
 - list of employees directly/indirectly reporting to a given manager (should be applicable to non-managers too)
-- get employee info (dept, title, etc.)
 DELETE
 - remove specific employee/list of employees
 - remove all employees by dept
@@ -37,7 +35,10 @@ public class EmployeeController {
     private final Logger LOG = LoggerFactory.getLogger(EmployeeController.class);
 
     @Autowired
-    public EmployeeRepo employeeRepo;
+    private EmployeeRepo employeeRepo;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @PostMapping
     @ResponseBody
@@ -78,5 +79,17 @@ public class EmployeeController {
         }
         return new ResponseEntity<Employee>(byId, HttpStatus.OK);
     }
+
+    @GetMapping("/{manager}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Employee>> getByManager(@PathVariable Employee manager) {
+        List<Employee> byManager = employeeService.findByManager(manager);
+        if (byManager == null) {
+            return new ResponseEntity<List<Employee>>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Employee>>(byManager, HttpStatus.OK);
+    }
+
 
 }
