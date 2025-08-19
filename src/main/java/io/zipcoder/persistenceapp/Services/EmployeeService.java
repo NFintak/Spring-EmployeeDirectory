@@ -94,4 +94,9 @@ public class EmployeeService {
         return null;
     }
 
+    public Boolean deleteById(int id) {
+        repo.delete(id);
+        return true;
+    }
+
 }

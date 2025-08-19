@@ -103,12 +103,19 @@ public class EmployeeController {
     @GetMapping("/dept/{id}")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Employee>> getByDeptNum(@PathVariable int deptNum) {
+    public ResponseEntity<List<Employee>> getByDeptNum(@PathVariable("deptNum") int deptNum) {
         List<Employee> byDeptNum = employeeService.findByDept(deptNum);
         if (byDeptNum.isEmpty()) {
             return new ResponseEntity<List<Employee>>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<List<Employee>>(byDeptNum, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Boolean> deleteEmployee(@PathVariable("id") int id) {
+        return new ResponseEntity<>(employeeService.deleteById(id), HttpStatus.OK);
     }
 
 }
