@@ -44,6 +44,12 @@ public class EmployeeTests {
     }
 
     @Test
+    public void testGetEmployeeId() {
+        Employee test = new Employee();
+        assertEquals(0, test.getEmployeeId());
+    }
+
+    @Test
     public void testGetSetNames() {
         Employee test = new Employee();
         String expectedFirst = "John";
