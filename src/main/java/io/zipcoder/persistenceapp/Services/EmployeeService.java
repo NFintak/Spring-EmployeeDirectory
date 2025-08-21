@@ -1,6 +1,7 @@
 package io.zipcoder.persistenceapp.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import io.zipcoder.persistenceapp.Models.Employee;
 import io.zipcoder.persistenceapp.Repos.EmployeeRepo;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Service
+@Component
 public class EmployeeService {
 
     @Autowired
@@ -22,7 +24,7 @@ public class EmployeeService {
     }
 
     public Employee update(int id, Employee newEmployee) {
-        Employee originalData = repo.findOne(id);
+        Employee originalData = repo.findById(id).get();
         if (originalData == null) {
             return repo.save(newEmployee);
         } else {
@@ -39,7 +41,7 @@ public class EmployeeService {
     }
 
     public Employee getEmployee(int id) {
-        return repo.findOne(id);
+        return repo.findById(id).get();
     }
 
     public Iterable<Employee> index() {
@@ -93,7 +95,7 @@ public class EmployeeService {
     }
 
     public Boolean deleteById(int id) {
-        repo.delete(id);
+        repo.delete(repo.findById(id).get());
         return true;
     }
 

@@ -4,19 +4,36 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "employees")
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "employeeId")
     private int employeeId;
 
+    @Column(name = "firstName")
     private String firstName;
+
+    @Column(name = "lastName")
     private String lastName;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "phoneNum")
     private String phoneNum;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "hireDate")
     private Date hireDate;
+
+    @Column(name = "manager")
     private Employee manager;
+
+    @Column(name = "deptNum")
     private int deptNum;
 
     public Employee() {

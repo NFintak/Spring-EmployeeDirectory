@@ -21,7 +21,7 @@ import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = PersistenceStarterApplication.class)
-@SpringBootTest(classes = PersistenceStarterApplication.class)
+//@SpringBootTest(classes = PersistenceStarterApplication.class)
 public class EmployeeServiceTests {
 
     @MockBean
