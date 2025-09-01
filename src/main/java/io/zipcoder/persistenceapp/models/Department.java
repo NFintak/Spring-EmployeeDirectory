@@ -6,7 +6,7 @@ import io.zipcoder.persistenceapp.models.Employee;
 @Entity
 public class Department {
 
-    private int deptId;
+    private Long deptId;
 
     private String deptName;
     private Employee deptManager;
@@ -21,7 +21,7 @@ public class Department {
         this.deptManager = deptManager;
     }
 
-    public int getDeptId() {
+    public Long getDeptId() {
         return deptId;
     }
 

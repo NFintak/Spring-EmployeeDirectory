@@ -6,7 +6,7 @@ import java.util.Date;
 @Entity
 public class Employee {
 
-    private int employeeId;
+    private Long employeeId;
     private String firstName;
     private String lastName;
     private String title;
@@ -48,7 +48,7 @@ public class Employee {
         this.deptNum = deptNum;
     }
 
-    public int getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
