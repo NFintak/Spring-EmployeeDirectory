@@ -18,4 +18,31 @@ public class EmployeeController {
         this.service = service;
     }
 
+    @PostMapping
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Employee> create(@RequestBody Employee employee) {
+        return new ResponseEntity<>(service.createEmployee(employee), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Employee> showOne(@PathVariable("employeeId") Long id) {
+        return new ResponseEntity<>(service.employeeById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Iterable<Employee>> showAll() {
+        return new ResponseEntity<>(service.employeeIndex(), HttpStatus.OK);
+    }
+
+    //full employee update
+
+    //update manager
+
+    //delete employee
+
 }
