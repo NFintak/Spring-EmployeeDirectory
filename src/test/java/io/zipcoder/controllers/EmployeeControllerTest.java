@@ -2,7 +2,7 @@ package io.zipcoder.controllers;
 
 import io.zipcoder.persistenceapp.models.Employee;
 import io.zipcoder.persistenceapp.repos.EmployeeRepo;
-import io.zipcoder.persistenceapp.controllers.EmployeeController;
+import io.zipcoder.persistenceapp.PersistenceStarterApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -15,9 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import java.util.Optional;
 
-@SpringBootTest
+@SpringBootTest //(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = PersistenceStarterApplication.class)
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 public class EmployeeControllerTest {
