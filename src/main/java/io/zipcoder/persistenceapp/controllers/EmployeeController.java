@@ -40,9 +40,25 @@ public class EmployeeController {
     }
 
     //full employee update
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Employee> updateAll(@PathVariable("id") Long id, @RequestBody Employee employee) {
+        return new ResponseEntity<>(service.updateEmployee(id, employee), HttpStatus.OK);
+    }
 
     //update manager
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Employee> updateManager(@PathVariable("id") Long id, @RequestBody Employee manager) {
+        return new ResponseEntity<>(service.updateManager(id, manager), HttpStatus.OK);
+    }
 
     //delete employee
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Boolean> deleteOne(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(service.deleteEmployee(id), HttpStatus.OK);
+    }
 
 }

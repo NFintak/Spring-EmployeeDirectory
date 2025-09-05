@@ -5,6 +5,7 @@ import io.zipcoder.persistenceapp.repos.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 
 @Service
 @Component
@@ -26,9 +27,39 @@ public class EmployeeService {
     }
 
     //list of employees under particular manager
+    public Iterable<Employee> findByManager(Employee manager) {
+        ArrayList<Employee> byManager = new ArrayList<>();
+        for (Employee employee : employeeIndex()) {
+            if (employee.getManager().equals(manager)) {
+                byManager.add(employee);
+            }
+        }
+        return byManager;
+    }
+
     //list of employees w no manager
+    public Iterable<Employee> findNoManager() {
+        ArrayList<Employee> noManager = new ArrayList<>();
+        for (Employee employee : employeeIndex()) {
+            if (employee.getManager() == null) {
+                noManager.add(employee);
+            }
+        }
+        return noManager;
+    }
+
     //employees reporting hierarchy (their manager, their manager's manager, etc.)
     //employees by department
+    public Iterable<Employee> findByDept(Long deptNum) {
+        ArrayList<Employee> byDept = new ArrayList<>();
+        for (Employee employee : employeeIndex()) {
+            if (employee.getDeptNum().equals(deptNum)) {
+                byDept.add(employee);
+            }
+        }
+        return byDept;
+    }
+
     //all employees reporting to a specific manager (direct + indirect)
 
     //get dept, title, etc of employee
@@ -56,8 +87,9 @@ public class EmployeeService {
         return repo.save(toUpdate);
     }
 
-    public void deleteEmployee(Long id) {
+    public Boolean deleteEmployee(Long id) {
         repo.delete(id);
+        return true;
     }
 
     //delete list of employees (by what criteria?)

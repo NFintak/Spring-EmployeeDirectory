@@ -4,6 +4,7 @@ import io.zipcoder.persistenceapp.models.Employee;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.Date;
+import java.util.Optional;
 
 public class EmployeeTests {
 
@@ -21,7 +22,7 @@ public class EmployeeTests {
 
     @Test
     public void test2NonNullConstruct() {
-        Employee test = new Employee("Jane", "Doe", "Intern", "555-555-5555", "test@test.com", null, new Employee(), 0);
+        Employee test = new Employee("Jane", "Doe", "Intern", "555-555-5555", "test@test.com", null, new Employee(), 0L);
         assertNotNull(test);
     }
 
@@ -97,10 +98,10 @@ public class EmployeeTests {
     @Test
     public void testGetSetDeptNum() {
         Employee test = new Employee();
-        int expected = 4;
-        assertEquals(0, test.getDeptNum());
+        Long expected = 4L;
+        assertTrue(test.getDeptNum().equals(0L));
         test.setDeptNum(expected);
-        assertEquals(4, test.getDeptNum());
+        assertTrue(test.getDeptNum().equals(4L));
     }
 
 }

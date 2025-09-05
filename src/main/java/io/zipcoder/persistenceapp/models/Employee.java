@@ -14,7 +14,7 @@ public class Employee {
     private String email;
     private Date hireDate;
     private Employee manager;
-    private int deptNum;
+    private Long deptNum;
 
     public Employee() {
         this.firstName = "";
@@ -24,7 +24,7 @@ public class Employee {
         this.email = "";
         this.hireDate = null;
         this.manager = null;
-        this.deptNum = 0;
+        this.deptNum = 0L;
     }
 
     public Employee(String firstName, String lastName) {
@@ -35,16 +35,17 @@ public class Employee {
         this.email = "";
         this.hireDate = null;
         this.manager = null;
-        this.deptNum = 0;
+        this.deptNum = 0L;
     }
 
-    public Employee(String firstName, String lastName, String title, String phoneNum, String email, Date hireDate, Employee manager, int deptNum) {
+    public Employee(String firstName, String lastName, String title, String phoneNum, String email, Date hireDate, Employee manager, Long deptNum) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
         this.phoneNum = phoneNum;
         this.email = email;
         this.hireDate = hireDate;
+        this.manager = manager;
         this.deptNum = deptNum;
     }
 
@@ -108,11 +109,11 @@ public class Employee {
         return manager;
     }
 
-    public void setDeptNum(int deptNum) {
+    public void setDeptNum(Long deptNum) {
         this.deptNum = deptNum;
     }
 
-    public int getDeptNum() {
+    public Long getDeptNum() {
         return deptNum;
     }
 
