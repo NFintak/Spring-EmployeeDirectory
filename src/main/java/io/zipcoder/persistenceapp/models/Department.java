@@ -4,11 +4,18 @@ import javax.persistence.*;
 import io.zipcoder.persistenceapp.models.Employee;
 
 @Entity
+@Table(name = "depts")
 public class Department {
 
+    @Id
+    @Column(name = "deptId")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long deptId;
 
+    @Column(name = "deptName")
     private String deptName;
+
+    @Column(name = "deptManager")
     private Employee deptManager;
 
     public Department() {
