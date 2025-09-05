@@ -20,18 +20,18 @@ public class EmployeeController {
 //        this.service = service;
 //    }
 
-    @PostMapping
 //    @ResponseBody
 //    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
     public ResponseEntity<Employee> create(@RequestBody Employee employee) {
         Employee toSave = repo.save(employee);
         return new ResponseEntity<>(toSave, HttpStatus.CREATED);
         //return new ResponseEntity<>(service.createEmployee(employee), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
 //    @ResponseBody
 //    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
     public ResponseEntity<Employee> showOne(@PathVariable("employeeId") Long id) {
         Employee employee = repo.findOne(id);
         if (employee == null) {
@@ -41,44 +41,45 @@ public class EmployeeController {
         //return new ResponseEntity<>(service.employeeById(id), HttpStatus.OK);
     }
 
-//    @GetMapping("/all")
 //    @ResponseBody
 //    @ResponseStatus(HttpStatus.OK)
-//    public ResponseEntity<Iterable<Employee>> showAll() {
-//        return new ResponseEntity<>(service.employeeIndex(), HttpStatus.OK);
-//    }
-//
-//    //find by manager
-//    @GetMapping("/{manager}")
+    @GetMapping("/all")
+    public ResponseEntity<Iterable<Employee>> showAll() {
+        return new ResponseEntity<>(repo.findAll(), HttpStatus.OK);
+    }
+
+    //find by manager
 //    @ResponseBody
 //    @ResponseStatus(HttpStatus.OK)
-//    public ResponseEntity<Iterable<Employee>> showByManager(@PathVariable("manager") Employee manager) {
-//        return new ResponseEntity<>(service.findByManager(manager), HttpStatus.OK);
-//    }
-//
-//    //find no manager
-//    @GetMapping("/noManager")
+    @GetMapping("/{manager}")
+    public ResponseEntity<Iterable<Employee>> showByManager(@PathVariable("manager") Employee manager) {
+        return new ResponseEntity<>(repo.findByManager(manager), HttpStatus.OK);
+    }
+
+    //find no manager
 //    @ResponseBody
 //    @ResponseStatus(HttpStatus.OK)
-//    public ResponseEntity<Iterable<Employee>> showNoManager() {
-//        return new ResponseEntity<>(service.findNoManager(), HttpStatus.OK);
-//    }
-//
-//    //find by dept
-//    @GetMapping("/{deptNum}")
+    @GetMapping("/noManager")
+    public ResponseEntity<Iterable<Employee>> showNoManager() {
+        return new ResponseEntity<>(repo.findNoManager(), HttpStatus.OK);
+    }
+
+    //find by dept
 //    @ResponseBody
 //    @ResponseStatus(HttpStatus.OK)
-//    public ResponseEntity<Iterable<Employee>> showByDept(@PathVariable("deptNum") Long deptNum) {
-//        return new ResponseEntity<>(service.findByDept(deptNum), HttpStatus.OK);
-//    }
-//
-//    //full employee update
-//    @PutMapping("/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public ResponseEntity<Employee> updateAll(@PathVariable("id") Long id, @RequestBody Employee employee) {
-//        return new ResponseEntity<>(service.updateEmployee(id, employee), HttpStatus.OK);
-//    }
-//
+    @GetMapping("/{deptNum}")
+    public ResponseEntity<Iterable<Employee>> showByDept(@PathVariable("deptNum") Long deptNum) {
+        return new ResponseEntity<>(repo.findByDeptNum(deptNum), HttpStatus.OK);
+    }
+
+    //full employee update
+    //@ResponseStatus(HttpStatus.OK)
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateAll(@PathVariable("id") Long id, @RequestBody Employee employee) {
+        return null;
+        //return new ResponseEntity<>(service.updateEmployee(id, employee), HttpStatus.OK);
+    }
+
 //    //update manager
 //    @PutMapping("/{id}")
 //    @ResponseStatus(HttpStatus.OK)
