@@ -4,35 +4,35 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "employees")
+//@Table(name = "employees")
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employeeId;
 
-    @Column(name = "firstName")
+    //@Column(name = "firstName")
     private String firstName;
 
-    @Column(name = "lastName")
+    //@Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "title")
+    //@Column(name = "title")
     private String title;
 
-    @Column(name = "phoneNum")
+    //@Column(name = "phoneNum")
     private String phoneNum;
 
-    @Column(name = "email")
+    //@Column(name = "email")
     private String email;
 
-    @Column(name = "hireDate")
+    //@Column(name = "hireDate")
     private Date hireDate;
 
-    @Column(name = "manager")
+    //@Column(name = "manager")
     private Employee manager;
 
-    @Column(name = "deptNum")
+    //@Column(name = "deptNum")
     private Long deptNum;
 
     public Employee() {
