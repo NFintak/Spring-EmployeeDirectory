@@ -81,10 +81,16 @@ public class EmployeeController {
 
     //get direct/indirect reports
 
+
     //get reporting hierarchy
 
-    //get by dept
 
+    //get by dept
+    @GetMapping("/depts/{deptNum}")
+    public ResponseEntity<Iterable<Employee>> getByDept(@PathVariable Long deptNum) {
+        Iterable<Employee> byDept = repo.findByDeptNum(deptNum);
+        return new ResponseEntity<>(byDept, HttpStatus.OK);
+    }
 
 
 }
