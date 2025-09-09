@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EmployeeRepo extends CrudRepository<Employee, Long> {
-    Iterable<Employee> findByManager(Employee manager);
+    Iterable<Employee> findByManager(Long managerId);
     Iterable<Employee> findNoManager();
     Iterable<Employee> findByDeptNum(Long deptNum);
 }

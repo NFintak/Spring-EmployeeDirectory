@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("API/employees")
@@ -14,101 +16,75 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeRepo repo;
-//    private EmployeeService service;
-//
-//    public EmployeeController(EmployeeService service) {
-//        this.service = service;
-//    }
 
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.CREATED)
+    //create employee
     @PostMapping
     public ResponseEntity<Employee> create(@RequestBody Employee employee) {
-        Employee toSave = repo.save(employee);
-        return new ResponseEntity<>(toSave, HttpStatus.CREATED);
-        //return new ResponseEntity<>(service.createEmployee(employee), HttpStatus.CREATED);
+        Employee saved = repo.save(employee);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{id}")
-    public ResponseEntity<Employee> showOne(@PathVariable("employeeId") Long id) {
+    //update all employee info sans manager
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateInfo(@PathVariable Long id, @RequestBody Employee updated) {
+        Employee toUpdate = repo.findOne(id);
+        if (toUpdate == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        toUpdate.setEmployeeId(updated.getEmployeeId());
+        toUpdate.setFirstName(updated.getFirstName());
+        toUpdate.setLastName(updated.getLastName());
+        toUpdate.setTitle(updated.getTitle());
+        toUpdate.setPhoneNum(updated.getPhoneNum());
+        toUpdate.setEmail(updated.getEmail());
+        toUpdate.setHireDate(updated.getHireDate());
+        toUpdate.setDeptNum(updated.getDeptNum());
+        Employee saved = repo.save(toUpdate);
+        return new ResponseEntity<>(saved, HttpStatus.OK);
+    }
+
+    //update manager
+    @PutMapping("/{id}/manager")
+    public ResponseEntity<Employee> updateManager(@PathVariable Long id, @RequestParam Long manager) {
+        Employee employee = repo.findOne(id);
+        if (employee == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        employee.setManager(manager);
+        Employee saved = repo.save(employee);
+        return new ResponseEntity<>(saved, HttpStatus.OK);
+    }
+
+    //get employee info
+    @GetMapping("/{id}/info")
+    public ResponseEntity<Employee> showOne(@PathVariable Long id) {
         Employee employee = repo.findOne(id);
         if (employee == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(employee, HttpStatus.OK);
-        //return new ResponseEntity<>(service.employeeById(id), HttpStatus.OK);
     }
 
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/all")
-    public ResponseEntity<Iterable<Employee>> showAll() {
-        return new ResponseEntity<>(repo.findAll(), HttpStatus.OK);
+    //get employees with no manager
+    @GetMapping("/no-manager")
+    public ResponseEntity<Iterable<Employee>> getNoManagers() {
+        Iterable<Employee> noManagers = repo.findNoManager();
+        return new ResponseEntity<>(noManagers, HttpStatus.OK);
     }
 
-    //find by manager
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{manager}")
-    public ResponseEntity<Iterable<Employee>> showByManager(@PathVariable("manager") Employee manager) {
-        return new ResponseEntity<>(repo.findByManager(manager), HttpStatus.OK);
+    //get direct reports
+    @GetMapping("/manager/{managerId}")
+    public ResponseEntity<Iterable<Employee>> getByManager(@PathVariable Long managerId) {
+        Iterable<Employee> byManager = repo.findByManager(managerId);
+        return new ResponseEntity<>(byManager, HttpStatus.OK);
     }
 
-    //find no manager
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/noManager")
-    public ResponseEntity<Iterable<Employee>> showNoManager() {
-        return new ResponseEntity<>(repo.findNoManager(), HttpStatus.OK);
-    }
+    //get direct/indirect reports
 
-    //find by dept
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{deptNum}")
-    public ResponseEntity<Iterable<Employee>> showByDept(@PathVariable("deptNum") Long deptNum) {
-        return new ResponseEntity<>(repo.findByDeptNum(deptNum), HttpStatus.OK);
-    }
+    //get reporting hierarchy
 
-    //full employee update
-    //@ResponseStatus(HttpStatus.OK)
-    @PutMapping("/{id}")
-    public ResponseEntity<Employee> updateAll(@PathVariable("id") Long id, @RequestBody Employee employee) {
-        return null;
-        //return new ResponseEntity<>(service.updateEmployee(id, employee), HttpStatus.OK);
-    }
+    //get by dept
 
-//    //update manager
-//    @PutMapping("/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public ResponseEntity<Employee> updateManager(@PathVariable("id") Long id, @RequestBody Employee manager) {
-//        return new ResponseEntity<>(service.updateManager(id, manager), HttpStatus.OK);
-//    }
-//
-//    //delete employee
-//    @DeleteMapping("/{id}")
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.OK)
-//    public ResponseEntity<Boolean> deleteOne(@PathVariable("id") Long id) {
-//        return new ResponseEntity<>(service.deleteEmployee(id), HttpStatus.OK);
-//    }
-//
-//    //delete by dept
-//    @DeleteMapping("/{deptNum}")
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.OK)
-//    public ResponseEntity<Boolean> deleteByManager(@PathVariable("deptNum") Long deptNum) {
-//        return new ResponseEntity<>(service.deleteByDept(deptNum), HttpStatus.OK);
-//    }
-//
-//    //delete by manager
-//    @DeleteMapping("/{manager}")
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.OK)
-//    public ResponseEntity<Boolean> deleteByManager(@PathVariable("manager") Employee manager) {
-//        return new ResponseEntity<>(service.deleteByManager(manager), HttpStatus.OK);
-//    }
+
 
 }

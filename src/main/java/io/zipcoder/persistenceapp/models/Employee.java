@@ -30,7 +30,7 @@ public class Employee {
     private Date hireDate;
 
     //@Column(name = "manager")
-    private Employee manager;
+    private Long managerId;
 
     //@Column(name = "deptNum")
     private Long deptNum;
@@ -67,6 +67,10 @@ public class Employee {
 //        this.manager = manager;
 //        this.deptNum = deptNum;
 //    }
+
+    public void setEmployeeId(Long id) {
+        this.employeeId = id;
+    }
 
     public Long getEmployeeId() {
         return employeeId;
@@ -120,12 +124,12 @@ public class Employee {
         return hireDate;
     }
 
-    public void setManager(Employee manager) {
-        this.manager = manager;
+    public void setManager(Long managerId) {
+        this.managerId = managerId;
     }
 
-    public Employee getManager() {
-        return manager;
+    public Long getManager() {
+        return managerId;
     }
 
     public void setDeptNum(Long deptNum) {
