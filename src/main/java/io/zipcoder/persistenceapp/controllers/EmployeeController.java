@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("API/employees")
+@RequestMapping("/API/employees")
 public class EmployeeController {
 
     @Autowired
@@ -19,6 +19,7 @@ public class EmployeeController {
 
     //create employee
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Employee> create(@RequestBody Employee employee) {
         Employee saved = repo.save(employee);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);

@@ -32,14 +32,35 @@ public class EmployeeControllerTest {
     }
 
     @Test
+    public void testCreate() throws Exception {
+        String json = "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"title\":\"Intern\"" +
+                ",\"phoneNum\":\"555-555-5555\",\"email\":\"test@test.com\",\"hireDate\":\"2000/9/20\"}";
+
+        mvc.perform(post("/API/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.firstName").value("Jane"))
+                .andExpect(jsonPath("$.lastName").value("Doe"))
+                .andExpect(jsonPath("$.title").value("Intern"));
+    }
+
+    @Test
     public void testShowOne() throws Exception {
         String json = "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"title\":\"\"," +
                 "\"phoneNum\":\"\",\"email\":\"\",\"hireDate\":null,\"manager\":null,\"deptNum\":0L}";
 
-        mvc.perform(post("/API/employees/1L")
+        String response = mvc.perform(post("/API/employees")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString();
+        Long employeeId = com.jayway.jsonpath.JsonPath.read(response, "$.employeeId");
+
+        mvc.perform(post("/API/employees/" + employeeId + "/info")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value("Jane"))
                 .andExpect(jsonPath("$.lastName").value("Doe"))
                 .andExpect(jsonPath("$deptNum").value("0L"));
