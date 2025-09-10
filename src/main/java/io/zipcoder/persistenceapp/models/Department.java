@@ -1,7 +1,6 @@
 package io.zipcoder.persistenceapp.models;
 
 import javax.persistence.*;
-import io.zipcoder.persistenceapp.models.Employee;
 
 @Entity
 @Table(name = "depts")

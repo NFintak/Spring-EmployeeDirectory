@@ -1,8 +1,8 @@
 package io.zipcoder.persistenceapp.controllers;
 
-import io.zipcoder.persistenceapp.models.Employee;
-import io.zipcoder.persistenceapp.repos.EmployeeRepo;
 //import io.zipcoder.persistenceapp.services.EmployeeService;
+import io.zipcoder.persistenceapp.repos.EmployeeRepo;
+import io.zipcoder.persistenceapp.models.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -83,7 +83,19 @@ public class EmployeeController {
 
 
     //get reporting hierarchy
-
+    @GetMapping("/{id}/rept-hierarchy")
+    public ResponseEntity<Iterable<Employee>> getReptHierarchy(@PathVariable Long employeeId) {
+        List<Employee> reptHierarchy = new ArrayList<>();
+        Employee start = repo.findOne(employeeId);
+        while (start != null && start.getManager() != null) {
+            Employee manager = repo.findOne(start.getManager());
+            if (manager != null) {
+                reptHierarchy.add(manager);
+                start = manager;
+            }
+        }
+        return new ResponseEntity<>(reptHierarchy, HttpStatus.OK);
+    }
 
     //get by dept
     @GetMapping("/depts/{deptNum}")

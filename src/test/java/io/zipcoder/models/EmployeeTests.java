@@ -1,11 +1,5 @@
 package io.zipcoder.models;
 
-import io.zipcoder.persistenceapp.models.Employee;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import java.util.Date;
-import java.util.Optional;
-
 public class EmployeeTests {
 
 //    @Test
