@@ -35,16 +35,16 @@ public class Employee {
     //@Column(name = "deptNum")
     private Long deptNum;
 
-//    public Employee() {
-//        this.firstName = "";
-//        this.lastName = "";
-//        this.title = "";
-//        this.phoneNum = "";
-//        this.email = "";
-//        this.hireDate = null;
-//        this.manager = null;
-//        this.deptNum = 0L;
-//    }
+    public Employee() {
+        this.firstName = "";
+        this.lastName = "";
+        this.title = "";
+        this.phoneNum = "";
+        this.email = "";
+        this.hireDate = null;
+        this.managerId = null;
+        this.deptNum = 0L;
+    }
 //
 //    public Employee(String firstName, String lastName) {
 //        this.firstName = firstName;
@@ -57,16 +57,16 @@ public class Employee {
 //        this.deptNum = 0L;
 //    }
 //
-//    public Employee(String firstName, String lastName, String title, String phoneNum, String email, Date hireDate, Employee manager, Long deptNum) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.title = title;
-//        this.phoneNum = phoneNum;
-//        this.email = email;
-//        this.hireDate = hireDate;
-//        this.manager = manager;
-//        this.deptNum = deptNum;
-//    }
+    public Employee(String firstName, String lastName, String title, String phoneNum, String email, Date hireDate, Long managerId, Long deptNum) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.title = title;
+        this.phoneNum = phoneNum;
+        this.email = email;
+        this.hireDate = hireDate;
+        this.managerId = managerId;
+        this.deptNum = deptNum;
+    }
 
     public void setEmployeeId(Long id) {
         this.employeeId = id;

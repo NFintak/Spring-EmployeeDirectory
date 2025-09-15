@@ -2,12 +2,14 @@ package io.zipcoder.controllers;
 
 //import io.zipcoder.persistenceapp.config.WebConfig;
 //import io.zipcoder.persistenceapp.services.EmployeeService;
+import io.zipcoder.persistenceapp.repos.EmployeeRepo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-        import org.springframework.http.MediaType;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -26,6 +28,9 @@ public class EmployeeControllerTest {
 
     private MockMvc mvc;
 
+//    @MockBean
+//    private EmployeeRepo repo;
+
     @Before
     public void setup() {
         mvc = MockMvcBuilders.webAppContextSetup(context).build();
@@ -33,10 +38,10 @@ public class EmployeeControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-        String json = "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"title\":\"Intern\"" +
-                ",\"phoneNum\":\"555-555-5555\",\"email\":\"test@test.com\",\"hireDate\":\"2000/9/20\"}";
+        String json = "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"title\":\"Intern\",\"phoneNum\":\"555-555-5555\"," +
+                "\"email\":\"test@test.com\",\"hireDate\":\"2000/9/20\",\"managerId\":\"0L\",\"deptNum\":\"0L\",}";
 
-        mvc.perform(post("/API/employees")
+        mvc.perform(post("/console/API/employees/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andExpect(status().isCreated())
