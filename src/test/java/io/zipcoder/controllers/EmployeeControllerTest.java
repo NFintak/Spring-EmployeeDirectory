@@ -37,7 +37,6 @@ public class EmployeeControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-
         String json = "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"title\":\"Intern\",\"phoneNum\":\"555-555-5555\"," +
                 "\"email\":\"test@test.com\",\"hireDate\":\"2000/9/20\",\"managerId\":\"0L\",\"deptNum\":\"0L\"}";
 
