@@ -1,8 +1,10 @@
 package io.zipcoder.controllers;
 
 //import io.zipcoder.persistenceapp.config.WebConfig;
-//import io.zipcoder.persistenceapp.services.EmployeeService;
 import io.zipcoder.persistenceapp.repos.EmployeeRepo;
+import io.zipcoder.persistenceapp.controllers.EmployeeController;
+import io.zipcoder.persistenceapp.models.Employee;
+import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,9 +30,6 @@ public class EmployeeControllerTest {
 
     private MockMvc mvc;
 
-//    @MockBean
-//    private EmployeeRepo repo;
-
     @Before
     public void setup() {
         mvc = MockMvcBuilders.webAppContextSetup(context).build();
@@ -38,6 +37,7 @@ public class EmployeeControllerTest {
 
     @Test
     public void testCreate() throws Exception {
+
         String json = "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"title\":\"Intern\",\"phoneNum\":\"555-555-5555\"," +
                 "\"email\":\"test@test.com\",\"hireDate\":\"2000/9/20\",\"managerId\":\"0L\",\"deptNum\":\"0L\"}";
 
